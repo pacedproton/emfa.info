@@ -1,23 +1,9 @@
 <script lang="ts">
-  import { page } from "$app/stores";
-  import { chapters } from "$lib/data/emfa";
   import { fade } from "svelte/transition";
 
-  let articleId = $derived($page.params.id);
+  export let data;
 
-  // Find the article and its chapter
-  let data = $derived.by(() => {
-    for (const chapter of chapters) {
-      const article = chapter.articles.find((a) => a.id === articleId);
-      if (article) {
-        return { article, chapter };
-      }
-    }
-    return null;
-  });
-
-  let article = $derived(data?.article);
-  let chapter = $derived(data?.chapter);
+  $: ({ article, chapter } = data);
 </script>
 
 <svelte:head>

@@ -1,18 +1,20 @@
 <script lang="ts">
   import { page } from "$app/stores";
+  import { slide } from "svelte/transition";
+  import Search from "./Search.svelte";
 
-  let isMenuOpen = $state(false);
+  let isMenuOpen = false;
+  let isSearchOpen = false;
 
   function toggleMenu() {
     isMenuOpen = !isMenuOpen;
   }
 
-  const navItems = [
-    { label: "Articles", href: "/articles" },
-    { label: "Timeline", href: "/timeline" },
-    { label: "Compliance", href: "/compliance" },
-    { label: "Glossary", href: "/glossary" },
-  ];
+  function openSearch() {
+    isSearchOpen = true;
+  }
+
+  $: activeRoute = $page.url.pathname;
 </script>
 
 <header class="header">
@@ -53,19 +55,48 @@
     </a>
 
     <nav class="desktop-nav">
-      {#each navItems as item}
-        <a
-          href={item.href}
-          class="nav-link"
-          class:active={$page.url.pathname.startsWith(item.href)}
-        >
-          {item.label}
-        </a>
-      {/each}
+      <a href="/articles" class:active={activeRoute.startsWith("/articles")}
+        >Articles</a
+      >
+      <a href="/timeline" class:active={activeRoute === "/timeline"}>Timeline</a
+      >
+      <a href="/compliance" class:active={activeRoute === "/compliance"}
+        >Compliance</a
+      >
+      <a href="/glossary" class:active={activeRoute === "/glossary"}>Glossary</a
+      >
     </nav>
 
     <div class="header-actions">
-      <button class="menu-toggle" onclick={toggleMenu} aria-label="Toggle menu">
+      <button class="search-trigger" on:click={openSearch}>
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="M21 21l-4.35-4.35" />
+        </svg>
+        <span class="search-placeholder">Search...</span>
+        <span class="search-shortcut">⌘K</span>
+      </button>
+
+      <a
+        href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1083"
+        target="_blank"
+        class="btn-outline"
+      >
+        Official Text ↗
+      </a>
+
+      <button
+        class="mobile-menu-btn"
+        on:click={toggleMenu}
+        aria-label="Toggle menu"
+      >
         <svg
           width="24"
           height="24"
@@ -85,22 +116,27 @@
   </div>
 
   {#if isMenuOpen}
-    <div class="mobile-menu">
-      <nav class="mobile-nav">
-        {#each navItems as item}
-          <a
-            href={item.href}
-            class="mobile-nav-link"
-            class:active={$page.url.pathname.startsWith(item.href)}
-            onclick={() => (isMenuOpen = false)}
-          >
-            {item.label}
-          </a>
-        {/each}
+    <div class="mobile-menu" transition:slide>
+      <nav>
+        <a href="/articles" on:click={toggleMenu}>Articles</a>
+        <a href="/timeline" on:click={toggleMenu}>Timeline</a>
+        <a href="/compliance" on:click={toggleMenu}>Compliance</a>
+        <a href="/glossary" on:click={toggleMenu}>Glossary</a>
       </nav>
     </div>
   {/if}
 </header>
+
+<Search bind:isOpen={isSearchOpen} on:close={() => (isSearchOpen = false)} />
+
+<svelte:window
+  on:keydown={(e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+      e.preventDefault();
+      openSearch();
+    }
+  }}
+/>
 
 <style>
   .header {
@@ -113,7 +149,7 @@
   }
 
   .header-inner {
-    height: 72px;
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -122,15 +158,17 @@
   .logo {
     display: flex;
     align-items: center;
-    gap: var(--space-3);
+    gap: 0.5rem;
     text-decoration: none;
-    color: var(--gray-900);
     font-weight: 700;
     font-size: 1.25rem;
+    color: var(--gray-900);
   }
 
   .logo-icon {
     color: var(--primary-600);
+    display: flex;
+    align-items: center;
   }
 
   .highlight {
@@ -139,75 +177,100 @@
 
   .desktop-nav {
     display: none;
-    gap: var(--space-8);
+    gap: 2rem;
   }
 
-  .nav-link {
+  .desktop-nav a {
     text-decoration: none;
     color: var(--gray-600);
     font-weight: 500;
-    font-size: 0.9375rem;
-    transition: color 0.2s ease;
-    position: relative;
+    transition: color 0.2s;
+    font-size: 0.95rem;
   }
 
-  .nav-link:hover {
+  .desktop-nav a:hover,
+  .desktop-nav a.active {
     color: var(--primary-600);
   }
 
-  .nav-link.active {
-    color: var(--primary-700);
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
   }
 
-  .nav-link.active::after {
-    content: "";
-    position: absolute;
-    bottom: -26px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: var(--primary-600);
+  .search-trigger {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--gray-100);
+    border: 1px solid var(--gray-200);
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    color: var(--gray-600);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
   }
 
-  .menu-toggle {
-    display: block;
+  .search-trigger:hover {
+    border-color: var(--primary-600);
+    color: var(--primary-600);
+    background: white;
+  }
+
+  .search-shortcut {
+    font-size: 0.75rem;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 0.1rem 0.3rem;
+    border-radius: 4px;
+  }
+
+  .btn-outline {
+    display: none;
+    text-decoration: none;
+    color: var(--gray-700);
+    border: 1px solid var(--gray-200);
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+  }
+
+  .btn-outline:hover {
+    background: var(--gray-50);
+    border-color: var(--gray-400);
+    color: var(--gray-900);
+  }
+
+  .mobile-menu-btn {
     background: none;
     border: none;
     color: var(--gray-700);
     cursor: pointer;
-    padding: var(--space-2);
+    padding: 0.5rem;
   }
 
   .mobile-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
+    border-top: 1px solid var(--gray-200);
     background: white;
-    border-bottom: 1px solid var(--gray-200);
-    padding: var(--space-4);
-    box-shadow: var(--shadow-lg);
   }
 
-  .mobile-nav {
+  .mobile-menu nav {
     display: flex;
     flex-direction: column;
-    gap: var(--space-2);
+    padding: 1rem;
   }
 
-  .mobile-nav-link {
-    display: block;
-    padding: var(--space-3) var(--space-4);
+  .mobile-menu a {
+    padding: 0.75rem 0;
     text-decoration: none;
-    color: var(--gray-700);
-    font-weight: 500;
-    border-radius: var(--radius-lg);
+    color: var(--gray-600);
+    border-bottom: 1px solid var(--gray-100);
   }
 
-  .mobile-nav-link:hover,
-  .mobile-nav-link.active {
-    background: var(--gray-50);
-    color: var(--primary-700);
+  .mobile-menu a:last-child {
+    border-bottom: none;
   }
 
   @media (min-width: 768px) {
@@ -215,8 +278,23 @@
       display: flex;
     }
 
-    .menu-toggle {
+    .mobile-menu-btn {
       display: none;
+    }
+
+    .btn-outline {
+      display: block;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .search-placeholder,
+    .search-shortcut {
+      display: none;
+    }
+
+    .search-trigger {
+      padding: 0.5rem;
     }
   }
 </style>
