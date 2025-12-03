@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { definitions } from '$lib/data/emfa';
+  import { definitions } from "$lib/data/emfa";
 </script>
 
 <footer class="footer">
@@ -16,15 +16,26 @@
           </div>
         </div>
         <p class="footer-description">
-          Independent educational resource providing comprehensive information about EU Regulation 2024/1083
-          (European Media Freedom Act). This site is not affiliated with the European Union or any governmental body.
+          Independent educational resource providing comprehensive information
+          about EU Regulation 2024/1083 (European Media Freedom Act). This site
+          is not affiliated with the European Union or any governmental body.
         </p>
         <div class="footer-disclaimer">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
             <circle cx="12" cy="12" r="10" />
             <path d="M12 16v-4M12 8h.01" />
           </svg>
-          <span>This site provides information for educational purposes only and does not constitute legal advice.</span>
+          <span
+            >This site provides information for educational purposes only and
+            does not constitute legal advice.</span
+          >
         </div>
       </div>
 
@@ -42,30 +53,69 @@
         <h4>Official Resources</h4>
         <ul>
           <li>
-            <a href="https://eur-lex.europa.eu/eli/reg/2024/1083/oj/eng" target="_blank" rel="noopener">
+            <a
+              href="https://eur-lex.europa.eu/eli/reg/2024/1083/oj/eng"
+              target="_blank"
+              rel="noopener"
+            >
               EUR-Lex Official Text
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                />
                 <polyline points="15 3 21 3 21 9" />
                 <line x1="10" y1="14" x2="21" y2="3" />
               </svg>
             </a>
           </li>
           <li>
-            <a href="https://digital-strategy.ec.europa.eu/en/policies/european-media-freedom-act" target="_blank" rel="noopener">
+            <a
+              href="https://digital-strategy.ec.europa.eu/en/policies/european-media-freedom-act"
+              target="_blank"
+              rel="noopener"
+            >
               EC Digital Strategy
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                />
                 <polyline points="15 3 21 3 21 9" />
                 <line x1="10" y1="14" x2="21" y2="3" />
               </svg>
             </a>
           </li>
           <li>
-            <a href="https://audiovisual-observatory.coe.int/" target="_blank" rel="noopener">
+            <a
+              href="https://audiovisual-observatory.coe.int/"
+              target="_blank"
+              rel="noopener"
+            >
               European Audiovisual Observatory
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                />
                 <polyline points="15 3 21 3 21 9" />
                 <line x1="10" y1="14" x2="21" y2="3" />
               </svg>
@@ -89,11 +139,14 @@
 
     <div class="footer-bottom">
       <div class="footer-eu">
-        <span class="eu-stars">★★★★★★★★★★★★</span>
-        <span>Regulation (EU) 2024/1083 of the European Parliament and of the Council</span>
+        <span
+          >Regulation (EU) 2024/1083 of the European Parliament and of the
+          Council</span
+        >
       </div>
       <p class="copyright">
-        Content based on publicly available EU legislation. Last updated: May 2024.
+        Content based on publicly available EU legislation. Last updated: May
+        2024.
       </p>
     </div>
   </div>
@@ -101,7 +154,11 @@
 
 <style>
   .footer {
-    background: linear-gradient(180deg, var(--gray-900) 0%, var(--gray-950) 100%);
+    background: linear-gradient(
+      180deg,
+      var(--gray-900) 0%,
+      var(--gray-950) 100%
+    );
     color: var(--gray-300);
     padding: var(--space-16) 0 var(--space-8);
   }

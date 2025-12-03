@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { keyStats } from '$lib/data/emfa';
-  import { fly, fade, scale } from 'svelte/transition';
-  import { quintOut, elasticOut } from 'svelte/easing';
+  import { onMount } from "svelte";
+  import { keyStats } from "$lib/data/emfa";
+  import { fly, fade, scale } from "svelte/transition";
+  import { quintOut, elasticOut } from "svelte/easing";
 
   let mounted = $state(false);
 
@@ -21,27 +21,47 @@
 
   <div class="container hero-content">
     {#if mounted}
-      <div class="hero-text" in:fly={{ y: 40, duration: 800, delay: 100, easing: quintOut }}>
-        <div class="hero-badge" in:scale={{ duration: 500, delay: 200, easing: elasticOut }}>
+      <div
+        class="hero-text"
+        in:fly={{ y: 40, duration: 800, delay: 100, easing: quintOut }}
+      >
+        <div
+          class="hero-badge"
+          in:scale={{ duration: 500, delay: 200, easing: elasticOut }}
+        >
           <span class="badge-icon">⚖</span>
           <span>Official EU Regulation</span>
         </div>
 
-        <h1 class="hero-title" in:fly={{ y: 30, duration: 800, delay: 300, easing: quintOut }}>
-          European Media<br/>
+        <h1
+          class="hero-title"
+          in:fly={{ y: 30, duration: 800, delay: 300, easing: quintOut }}
+        >
+          European Media<br />
           <span class="gradient-text">Freedom Act</span>
         </h1>
 
-        <p class="hero-subtitle" in:fly={{ y: 20, duration: 700, delay: 400, easing: quintOut }}>
-          Regulation (EU) 2024/1083 of the European Parliament and of the Council
+        <p
+          class="hero-subtitle"
+          in:fly={{ y: 20, duration: 700, delay: 400, easing: quintOut }}
+        >
+          Regulation (EU) 2024/1083 of the European Parliament and of the
+          Council
         </p>
 
-        <p class="hero-description" in:fly={{ y: 20, duration: 700, delay: 500, easing: quintOut }}>
-          The first comprehensive EU-wide legal framework establishing common safeguards
-          for media freedom, editorial independence, and journalist protection across all Member States.
+        <p
+          class="hero-description"
+          in:fly={{ y: 20, duration: 700, delay: 500, easing: quintOut }}
+        >
+          The first comprehensive EU-wide legal framework establishing common
+          safeguards for media freedom, editorial independence, and journalist
+          protection across all Member States.
         </p>
 
-        <div class="hero-meta" in:fly={{ y: 20, duration: 700, delay: 600, easing: quintOut }}>
+        <div
+          class="hero-meta"
+          in:fly={{ y: 20, duration: 700, delay: 600, easing: quintOut }}
+        >
           <div class="meta-item">
             <span class="meta-label">Entry into Force</span>
             <span class="meta-value">7 May 2024</span>
@@ -58,20 +78,33 @@
           </div>
         </div>
 
-        <div class="hero-actions" in:fly={{ y: 20, duration: 700, delay: 700, easing: quintOut }}>
-          <a href="#articles" class="btn btn-primary">
+        <div
+          class="hero-actions"
+          in:fly={{ y: 20, duration: 700, delay: 700, easing: quintOut }}
+        >
+          <a href="/articles" class="btn btn-primary">
             <span>Explore Legal Framework</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </a>
-          <a href="#compliance" class="btn btn-secondary">
+          <a href="/compliance" class="btn btn-secondary">
             Compliance Checker
           </a>
         </div>
       </div>
 
-      <div class="hero-card-wrapper" in:fly={{ x: 40, duration: 900, delay: 400, easing: quintOut }}>
+      <div
+        class="hero-card-wrapper"
+        in:fly={{ x: 40, duration: 900, delay: 400, easing: quintOut }}
+      >
         <div class="hero-card">
           <div class="card-header">
             <span class="card-icon">📋</span>
@@ -79,18 +112,40 @@
           </div>
           <ul class="quick-stats">
             {#each Object.entries(keyStats) as [key, value], i}
-              <li in:scale={{ duration: 400, delay: 600 + i * 100, easing: elasticOut }}>
+              <li
+                in:scale={{
+                  duration: 400,
+                  delay: 600 + i * 100,
+                  easing: elasticOut,
+                }}
+              >
                 <span class="stat-number">{value}</span>
-                <span class="stat-label">{key.charAt(0).toUpperCase() + key.slice(1)}</span>
+                <span class="stat-label"
+                  >{key.charAt(0).toUpperCase() + key.slice(1)}</span
+                >
               </li>
             {/each}
           </ul>
           <div class="card-footer">
-            <a href="https://eur-lex.europa.eu/eli/reg/2024/1083/oj/eng" target="_blank" rel="noopener" class="official-link">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                <polyline points="15 3 21 3 21 9"/>
-                <line x1="10" y1="14" x2="21" y2="3"/>
+            <a
+              href="https://eur-lex.europa.eu/eli/reg/2024/1083/oj/eng"
+              target="_blank"
+              rel="noopener"
+              class="official-link"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                />
+                <polyline points="15 3 21 3 21 9" />
+                <line x1="10" y1="14" x2="21" y2="3" />
               </svg>
               <span>Official EUR-Lex Text</span>
             </a>
@@ -102,8 +157,15 @@
 
   <div class="hero-scroll">
     <a href="#overview" aria-label="Scroll to overview">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M12 5v14M5 12l7 7 7-7"/>
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <path d="M12 5v14M5 12l7 7 7-7" />
       </svg>
     </a>
   </div>
@@ -128,7 +190,12 @@
   .hero-gradient {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, var(--gray-50) 0%, white 50%, var(--primary-50) 100%);
+    background: linear-gradient(
+      135deg,
+      var(--gray-50) 0%,
+      white 50%,
+      var(--primary-50) 100%
+    );
   }
 
   .hero-pattern {
@@ -372,9 +439,19 @@
   }
 
   @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-    40% { transform: translateY(-8px); }
-    60% { transform: translateY(-4px); }
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-8px);
+    }
+    60% {
+      transform: translateY(-4px);
+    }
   }
 
   @media (max-width: 1024px) {
